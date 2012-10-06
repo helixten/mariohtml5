@@ -3,7 +3,7 @@
 	Code by Rob Kleffner, 2011
 */
 
-Mario.Mushroom = function(world, x, y) {
+Mario.Mushroom = function(world, x, y, type) {
     this.RunTime = 0;
     this.GroundInertia = 0.89;
     this.AirInertia = 0.89;
@@ -14,9 +14,11 @@ Mario.Mushroom = function(world, x, y) {
     this.X = x;
     this.Y = y;
     this.Image = Enjine.Resources.Images["items"];
+    this.Type = Mario.Mushroom.Big;
     this.XPicO = 8;
     this.YPicO = 15;
     this.YPic = 0;
+    this.XPic = this.Type;
     this.Height = 12;
     this.Facing = 1;
     this.PicWidth = this.PicHeight = 16;
@@ -29,7 +31,17 @@ Mario.Mushroom.prototype.CollideCheck = function() {
     var xMarioD = Mario.MarioCharacter.X - this.X, yMarioD = Mario.MarioCharacter.Y - this.Y;
     if (xMarioD > -16 && xMarioD < 16) {
         if (yMarioD > -this.Height && yMarioD < Mario.MarioCharacter.Height) {
-            Mario.MarioCharacter.GetMushroom();
+            switch (this.Type) {
+                case Mario.Mushroom.Big:
+                    Mario.MarioCharacter.GetMushroom();
+                    break;
+                case Mario.Mushroom.Flower:
+                    Mario.MarioCharacter.GetFlower();
+                    break;
+                case Mario.Mushroom.OneUp:
+                    Mario.MarioCharacter.Get1Up();
+                    break;
+            }
             this.World.RemoveSprite(this);
         }
     }
@@ -192,3 +204,8 @@ Mario.Mushroom.prototype.BumpCheck = function(x, y) {
         this.Ya = -10;
     }
 };
+
+//Static variables
+Mario.Mushroom.Big = 0;
+Mario.Mushroom.Flower = 1;
+Mario.Mushroom.OneUp = 2;
