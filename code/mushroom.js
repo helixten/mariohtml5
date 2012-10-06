@@ -41,6 +41,9 @@ Mario.Mushroom.prototype.CollideCheck = function() {
                 case Mario.Mushroom.OneUp:
                     Mario.MarioCharacter.Get1Up();
                     break;
+                case Mario.Mushroom.Poison:
+                    Mario.MarioCharacter.GetHurt();
+                    break;
             }
             this.World.RemoveSprite(this);
         }
@@ -209,3 +212,4 @@ Mario.Mushroom.prototype.BumpCheck = function(x, y) {
 Mario.Mushroom.Big = 0;
 Mario.Mushroom.Flower = 1;
 Mario.Mushroom.OneUp = 2;
+Mario.Mushroom.Poison = 3;
