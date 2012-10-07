@@ -119,6 +119,9 @@ Mario.Character.prototype.Blink = function(on) {
                 case Mario.Mushroom.Ninja: 
                     this.Image = Enjine.Resources.Images["ninjaMario"];
                     break;
+                case Mario.Mushroom.Ghost: 
+                    this.Image = Enjine.Resources.Images["ghostMario"];
+                    break;
             }
         } else {
             this.Image = Enjine.Resources.Images["mario"];
@@ -140,28 +143,24 @@ Mario.Character.prototype.Move = function() {
     /* Debug */
     if (Enjine.KeyboardInput.IsKeyDown(Enjine.Keys.Q) && this.PowerUpTime === 0) {
         this.World.Paused = true;
-        switch (this.debug % 4) {
+        this.PowerUpTime = 18;
+        Enjine.Resources.PlaySound("powerup");
+        switch (this.debug % 5) {
             case 0: 
-                this.PowerUpTime = -18;
-                Enjine.Resources.PlaySound("powerdown");
                 this.SetLarge(false, false);
                 break;
             case 1: 
-                this.PowerUpTime = 18;
-                Enjine.Resources.PlaySound("powerup");
                 this.SetLarge(true, false);
                 break;
             case 2: 
-                this.PowerUpTime = 18;
-                Enjine.Resources.PlaySound("powerup");
                 this.SetLarge(true, Mario.Mushroom.Flower);
                 break;
             case 3: 
-                this.PowerUpTime = 18;
-                Enjine.Resources.PlaySound("powerup");
                 this.SetLarge(true, Mario.Mushroom.Ninja);
                 break;
-        }
+            case 4: 
+                this.SetLarge(true, Mario.Mushroom.Ghost);
+                break;        }
         this.debug++;
     }
 
