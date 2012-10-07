@@ -424,7 +424,7 @@ Mario.LevelState.prototype.Bump = function(x, y, canBreakBricks) {
                 var powerup = ((Math.random() * 5) | 0);
                 switch (powerup) {
                     case 0: 
-                        this.AddSprite(new Mario.FireFlower(this, x * 16 + 8, y * 16 + 8));
+                        this.AddSprite(new Mario.Mushroom(this, x * 16 + 8, y * 16 + 8, Mario.Mushroom.Fire));
                         break;
                     case 1: 
                         this.AddSprite(new Mario.Mushroom(this, x * 16 + 8, y * 16 + 8, Mario.Mushroom.Ninja));

@@ -117,7 +117,7 @@ Mario.Character.prototype.Blink = function(on) {
 
         if (this.PowerUp) {
             switch (this.PowerUp) {
-                case Mario.Mushroom.Flower: 
+                case Mario.Mushroom.Fire: 
                     this.Image = Enjine.Resources.Images["fireMario"];
                     break;
                 case Mario.Mushroom.Ninja: 
@@ -160,7 +160,7 @@ Mario.Character.prototype.Move = function() {
                 this.SetLarge(true, false);
                 break;
             case 2: 
-                this.SetLarge(true, Mario.Mushroom.Flower);
+                this.SetLarge(true, Mario.Mushroom.Fire);
                 break;
             case 3: 
                 this.SetLarge(true, Mario.Mushroom.Ninja);
@@ -299,7 +299,7 @@ Mario.Character.prototype.Move = function() {
     
     if (this.PowerUp) {
         switch (this.PowerUp) {
-            case Mario.Mushroom.Flower: 
+            case Mario.Mushroom.Fire: 
                 if (Enjine.KeyboardInput.IsKeyDown(Enjine.Keys.A) && this.CanShoot && this.World.FireballsOnScreen < 2) {
                     Enjine.Resources.PlaySound("fireball");
                     this.World.AddSprite(new Mario.Fireball(this.World, this.X + this.Facing * 6, this.Ducking ? this.Y - 5 : this.Y - 20, this.Facing));

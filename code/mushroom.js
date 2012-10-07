@@ -41,7 +41,7 @@ Mario.Mushroom.prototype.CollideCheck = function() {
                 case Mario.Mushroom.Poison:
                     Mario.MarioCharacter.GetHurt();
                     break;
-                case Mario.Mushroom.Flower:
+                case Mario.Mushroom.Fire:
                 case Mario.Mushroom.Ninja:
                 case Mario.Mushroom.Ghost:
                 case Mario.Mushroom.Princess:
@@ -214,7 +214,7 @@ Mario.Mushroom.prototype.BumpCheck = function(x, y) {
 
 //Static variables
 Mario.Mushroom.Big = 0;
-Mario.Mushroom.Flower = 1;
+Mario.Mushroom.Fire = 1;
 Mario.Mushroom.OneUp = 2;
 Mario.Mushroom.Poison = 3;
 Mario.Mushroom.Ninja = 4;
