@@ -111,6 +111,10 @@ Mario.Character.prototype.Blink = function(on) {
     this.PowerUp = on ? this.NewPowerUp : this.LastPowerUp;
     
     if (this.Large) {
+        this.XPicO = 16;
+        this.YPicO = 31;
+        this.PicWidth = this.PicHeight = 32;
+
         if (this.PowerUp) {
             switch (this.PowerUp) {
                 case Mario.Mushroom.Flower: 
@@ -122,14 +126,14 @@ Mario.Character.prototype.Blink = function(on) {
                 case Mario.Mushroom.Ghost: 
                     this.Image = Enjine.Resources.Images["ghostMario"];
                     break;
+                case Mario.Mushroom.Princess: 
+                    this.Image = Enjine.Resources.Images["princessMario"];
+                    this.PicHeight = 34;
+                    break;
             }
         } else {
             this.Image = Enjine.Resources.Images["mario"];
         }
-        
-        this.XPicO = 16;
-        this.YPicO = 31;
-        this.PicWidth = this.PicHeight = 32;
     } else {
         this.Image = Enjine.Resources.Images["smallMario"];
         this.XPicO = 8;
@@ -145,7 +149,7 @@ Mario.Character.prototype.Move = function() {
         this.World.Paused = true;
         this.PowerUpTime = 18;
         Enjine.Resources.PlaySound("powerup");
-        switch (this.debug % 5) {
+        switch (this.debug % 6) {
             case 0: 
                 this.SetLarge(false, false);
                 break;
@@ -160,7 +164,11 @@ Mario.Character.prototype.Move = function() {
                 break;
             case 4: 
                 this.SetLarge(true, Mario.Mushroom.Ghost);
-                break;        }
+                break;
+            case 5: 
+                this.SetLarge(true, Mario.Mushroom.Princess);
+                break;  
+        }
         this.debug++;
     }
 

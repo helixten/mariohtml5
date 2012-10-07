@@ -421,7 +421,7 @@ Mario.LevelState.prototype.Bump = function(x, y, canBreakBricks) {
             if (!Mario.MarioCharacter.Large) {
                 this.AddSprite(new Mario.Mushroom(this, x * 16 + 8, y * 16 + 8));
             } else {
-                var powerup = ((Math.random() * 3) | 0);
+                var powerup = ((Math.random() * 4) | 0);
                 switch (powerup) {
                     case 0: 
                         this.AddSprite(new Mario.FireFlower(this, x * 16 + 8, y * 16 + 8));
@@ -431,6 +431,9 @@ Mario.LevelState.prototype.Bump = function(x, y, canBreakBricks) {
                         break;
                     case 2: 
                         this.AddSprite(new Mario.Mushroom(this, x * 16 + 8, y * 16 + 8, Mario.Mushroom.Ghost));
+                        break;
+                    case 3: 
+                        this.AddSprite(new Mario.Mushroom(this, x * 16 + 8, y * 16 + 8, Mario.Mushroom.Princess));
                         break;
                 }
             }

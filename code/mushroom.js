@@ -50,6 +50,9 @@ Mario.Mushroom.prototype.CollideCheck = function() {
                 case Mario.Mushroom.Ghost:
                     Mario.MarioCharacter.GetPowerUp(Mario.Mushroom.Ghost);
                     break;
+                case Mario.Mushroom.Princess:
+                    Mario.MarioCharacter.GetPowerUp(Mario.Mushroom.Princess);
+                    break;
             }
             this.World.RemoveSprite(this);
         }
@@ -221,3 +224,4 @@ Mario.Mushroom.OneUp = 2;
 Mario.Mushroom.Poison = 3;
 Mario.Mushroom.Ninja = 4;
 Mario.Mushroom.Ghost = 5;
+Mario.Mushroom.Princess = 6;
