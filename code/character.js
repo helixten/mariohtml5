@@ -96,6 +96,10 @@ Mario.Character.prototype.SetLarge = function(large, powerup, type) {
         powerup = false;
     }
     
+    if (!powerup) {
+        type = false;
+    }
+    
     this.LastLarge = this.Large;
     this.LastPowerUp = this.PowerUp;
     this.LastPowerUpType = this.PowerUpType;
