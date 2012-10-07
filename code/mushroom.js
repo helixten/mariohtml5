@@ -36,7 +36,7 @@ Mario.Mushroom.prototype.CollideCheck = function() {
                     Mario.MarioCharacter.GetMushroom();
                     break;
                 case Mario.Mushroom.Flower:
-                    Mario.MarioCharacter.GetFlower();
+                    Mario.MarioCharacter.GetPowerUp(Mario.Mushroom.Flower);
                     break;
                 case Mario.Mushroom.OneUp:
                     Mario.MarioCharacter.Get1Up();
@@ -45,7 +45,7 @@ Mario.Mushroom.prototype.CollideCheck = function() {
                     Mario.MarioCharacter.GetHurt();
                     break;
                 case Mario.Mushroom.Ninja:
-                    Mario.MarioCharacter.GetFlower();
+                    Mario.MarioCharacter.GetPowerUp(Mario.Mushroom.Ninja);
                     break;
             }
             this.World.RemoveSprite(this);

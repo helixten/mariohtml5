@@ -6,7 +6,7 @@
 Mario.Character = function() {
     //these are static in Notch's code... here it doesn't seem necessary
     this.Large = false;
-    this.Fire = false;
+    this.PowerUp = false;
     this.Coins = 0;
     this.Lives = 3;
     this.LevelString = "none";
@@ -42,9 +42,11 @@ Mario.Character = function() {
     this.Carried = null;
     
     this.LastLarge = false;
-    this.LastFire = false;
+    this.LastPowerUp = false;
+    this.LastPowerUpType = false;
     this.NewLarge = false;
-    this.NewFire = false;
+    this.NewPowerUp = false;
+    this.NewPowerUpType = false;
 };
 
 Mario.Character.prototype = new Mario.NotchSprite(null);
@@ -83,34 +85,45 @@ Mario.Character.prototype.Initialize = function(world) {
     //Sprite
     this.Carried = null;
     
-    this.SetLarge(this.Large, this.Fire);
+    this.SetLarge(this.Large, this.PowerUp);
 };
 
-Mario.Character.prototype.SetLarge = function(large, fire) {
-    if (fire) {
+Mario.Character.prototype.SetLarge = function(large, powerup, type) {
+    if (powerup) {
         large = true;
     }
     if (!large) {
-        fire = false;
+        powerup = false;
     }
     
     this.LastLarge = this.Large;
-    this.LastFire = this.Fire;
+    this.LastPowerUp = this.PowerUp;
+    this.LastPowerUpType = this.PowerUpType;
     this.Large = large;
-    this.Fire = fire;
+    this.PowerUp = powerup;
+    this.PowerUpType = type;
     this.NewLarge = this.Large;
-    this.NewFire = this.Fire;
+    this.NewPowerUp = this.PowerUp;
+    this.NewPowerUpType = this.PowerUpType;
     
     this.Blink(true);
 };
 
 Mario.Character.prototype.Blink = function(on) {
     this.Large = on ? this.NewLarge : this.LastLarge;
-    this.Fire = on ? this.NewFire : this.LastFire;
+    this.PowerUp = on ? this.NewPowerUp : this.LastPowerUp;
+    this.PowerUpType = on ? this.NewPowerUpType : this.LastPowerUpType;
     
     if (this.Large) {
-        if (this.Fire) {
-            this.Image = Enjine.Resources.Images["fireMario"];
+        if (this.PowerUp) {
+            switch (this.PowerUpType) {
+                case Mario.Mushroom.Flower: 
+                    this.Image = Enjine.Resources.Images["fireMario"];
+                    break;
+                case Mario.Mushroom.Ninja: 
+                    this.Image = Enjine.Resources.Images["ninjaMario"];
+                    break;
+            }
         } else {
             this.Image = Enjine.Resources.Images["mario"];
         }
@@ -246,9 +259,21 @@ Mario.Character.prototype.Move = function() {
         this.Sliding = false;  
     }
     
-    if (Enjine.KeyboardInput.IsKeyDown(Enjine.Keys.A) && this.CanShoot && this.Fire && this.World.FireballsOnScreen < 2) {
-        Enjine.Resources.PlaySound("fireball");
-        this.World.AddSprite(new Mario.Fireball(this.World, this.X + this.Facing * 6, this.Y - 20, this.Facing));
+    if (this.PowerUp) {
+        switch (this.PowerUpType) {
+            case Mario.Mushroom.Flower: 
+                if (Enjine.KeyboardInput.IsKeyDown(Enjine.Keys.A) && this.CanShoot && this.World.FireballsOnScreen < 2) {
+                    Enjine.Resources.PlaySound("fireball");
+                    this.World.AddSprite(new Mario.Fireball(this.World, this.X + this.Facing * 6, this.Ducking ? this.Y - 5 : this.Y - 20, this.Facing));
+                }
+                break;
+            case Mario.Mushroom.Ninja: 
+                if (Enjine.KeyboardInput.IsKeyDown(Enjine.Keys.A) && this.CanShoot && this.World.FireballsOnScreen < 4) {
+                    Enjine.Resources.PlaySound("fireball");
+                    this.World.AddSprite(new Mario.NinjaStar(this.World, this.X + this.Facing * 6, this.Ducking ? this.Y - 5 : this.Y - 20, this.Facing));
+                }
+                break;
+        }    
     }
     
     this.CanShoot = !Enjine.KeyboardInput.IsKeyDown(Enjine.Keys.A);
@@ -572,7 +597,7 @@ Mario.Character.prototype.GetHurt = function() {
         this.World.Paused = true;
         this.PowerUpTime = -18;
         Enjine.Resources.PlaySound("powerdown");
-        if (this.Fire) {
+        if (this.PowerUp) {
             this.SetLarge(true, false);
         } else {
             this.SetLarge(false, false);
@@ -600,20 +625,15 @@ Mario.Character.prototype.Die = function() {
     this.SetLarge(false, false);
 };
 
-Mario.Character.prototype.GetFlower = function() {
+Mario.Character.prototype.GetPowerUp = function(type) {
     if (this.DeathTime > 0 && this.World.Paused) {
         return;
     }
-    
-    if (!this.Fire) {
-        this.World.Paused = true;
-        this.PowerUpTime = 18;
-        Enjine.Resources.PlaySound("powerup");
-        this.SetLarge(true, true);
-    } else {
-        this.GetCoin();
-        Enjine.Resources.PlaySound("coin");
-    }
+            
+    this.World.Paused = true;
+    this.PowerUpTime = 18;
+    Enjine.Resources.PlaySound("powerup");
+    this.SetLarge(true, true, type);
 };
 
 Mario.Character.prototype.GetMushroom = function() {
@@ -626,9 +646,6 @@ Mario.Character.prototype.GetMushroom = function() {
         this.PowerUpTime = 18;
         Enjine.Resources.PlaySound("powerup");
         this.SetLarge(true, false);
-    } else {
-        this.GetCoin();
-        Enjine.Resources.PlaySound("coin");
     }
 };
 

@@ -29,7 +29,7 @@ Mario.FireFlower.prototype.CollideCheck = function() {
 	var xMarioD = Mario.MarioCharacter.X - this.X, yMarioD = Mario.MarioCharacter.Y - this.Y;
 	if (xMarioD > -16 && xMarioD < 16) {
 		if (yMarioD > -this.Height && yMarioD < Mario.MarioCharacter.Height) {
-			Mario.MarioCharacter.GetFlower();
+			Mario.MarioCharacter.GetPowerUp(Mario.Mushroom.Flower);
 			this.World.RemoveSprite(this);
 		}
 	}
