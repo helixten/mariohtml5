@@ -130,6 +130,9 @@ Mario.Character.prototype.Blink = function(on) {
                     this.Image = Enjine.Resources.Images["princessMario"];
                     this.PicHeight = 34;
                     break;
+                case Mario.Mushroom.Toad: 
+                    this.Image = Enjine.Resources.Images["toadMario"];
+                    break;
             }
         } else {
             this.Image = Enjine.Resources.Images["mario"];
@@ -149,7 +152,7 @@ Mario.Character.prototype.Move = function() {
         this.World.Paused = true;
         this.PowerUpTime = 18;
         Enjine.Resources.PlaySound("powerup");
-        switch (this.debug % 6) {
+        switch (this.debug % 7) {
             case 0: 
                 this.SetLarge(false, false);
                 break;
@@ -167,6 +170,9 @@ Mario.Character.prototype.Move = function() {
                 break;
             case 5: 
                 this.SetLarge(true, Mario.Mushroom.Princess);
+                break;  
+            case 6: 
+                this.SetLarge(true, Mario.Mushroom.Toad);
                 break;  
         }
         this.debug++;

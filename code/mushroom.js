@@ -35,23 +35,18 @@ Mario.Mushroom.prototype.CollideCheck = function() {
                 case Mario.Mushroom.Big:
                     Mario.MarioCharacter.GetMushroom();
                     break;
-                case Mario.Mushroom.Flower:
-                    Mario.MarioCharacter.GetPowerUp(Mario.Mushroom.Flower);
-                    break;
                 case Mario.Mushroom.OneUp:
                     Mario.MarioCharacter.Get1Up();
                     break;
                 case Mario.Mushroom.Poison:
                     Mario.MarioCharacter.GetHurt();
                     break;
+                case Mario.Mushroom.Flower:
                 case Mario.Mushroom.Ninja:
-                    Mario.MarioCharacter.GetPowerUp(Mario.Mushroom.Ninja);
-                    break;
                 case Mario.Mushroom.Ghost:
-                    Mario.MarioCharacter.GetPowerUp(Mario.Mushroom.Ghost);
-                    break;
                 case Mario.Mushroom.Princess:
-                    Mario.MarioCharacter.GetPowerUp(Mario.Mushroom.Princess);
+                case Mario.Mushroom.Toad:
+                    Mario.MarioCharacter.GetPowerUp(this.Type);
                     break;
             }
             this.World.RemoveSprite(this);
@@ -225,3 +220,4 @@ Mario.Mushroom.Poison = 3;
 Mario.Mushroom.Ninja = 4;
 Mario.Mushroom.Ghost = 5;
 Mario.Mushroom.Princess = 6;
+Mario.Mushroom.Toad = 7;

@@ -16,7 +16,7 @@ Mario.LoadingState.prototype = new Enjine.GameState();
 
 Mario.LoadingState.prototype.Enter = function() {
     var i = 0;
-    for (i = 0; i < 18; i++) {
+    for (i = 0; i < 19; i++) {
         this.Images[i] = {};
     }
     
@@ -38,6 +38,7 @@ Mario.LoadingState.prototype.Enter = function() {
     this.Images[15].name = "ninjaMario";
     this.Images[16].name = "ghostMario";
     this.Images[17].name = "princessMario";
+    this.Images[18].name = "toadMario";
 
     this.Images[0].src = "images/bgsheet.png";
     this.Images[1].src = "images/endscene.gif";
@@ -57,6 +58,7 @@ Mario.LoadingState.prototype.Enter = function() {
     this.Images[15].src = "images/ninjamariosheet.png";
     this.Images[16].src = "images/ghostmariosheet.png";
     this.Images[17].src = "images/princessmariosheet.png";
+    this.Images[18].src = "images/toadmariosheet.png";
     
     Enjine.Resources.AddImages(this.Images);
     
