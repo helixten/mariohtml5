@@ -46,6 +46,7 @@ Mario.Mushroom.prototype.CollideCheck = function() {
                 case Mario.Mushroom.Ghost:
                 case Mario.Mushroom.Princess:
                 case Mario.Mushroom.Toad:
+                case Mario.Mushroom.Mustashe:
                     Mario.MarioCharacter.GetPowerUp(this.Type);
                     break;
             }
@@ -221,3 +222,4 @@ Mario.Mushroom.Ninja = 4;
 Mario.Mushroom.Ghost = 5;
 Mario.Mushroom.Princess = 6;
 Mario.Mushroom.Toad = 7;
+Mario.Mushroom.Mustashe = 8;
