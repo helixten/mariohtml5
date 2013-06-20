@@ -421,7 +421,26 @@ Mario.LevelState.prototype.Bump = function(x, y, canBreakBricks) {
             if (!Mario.MarioCharacter.Large) {
                 this.AddSprite(new Mario.Mushroom(this, x * 16 + 8, y * 16 + 8));
             } else {
-                this.AddSprite(new Mario.FireFlower(this, x * 16 + 8, y * 16 + 8));
+                var powerup = ((Math.random() * 6) | 0);
+                switch (powerup) {
+                    case 0: 
+                        this.AddSprite(new Mario.Mushroom(this, x * 16 + 8, y * 16 + 8, Mario.Mushroom.Fire));
+                        break;
+                    case 1: 
+                        this.AddSprite(new Mario.Mushroom(this, x * 16 + 8, y * 16 + 8, Mario.Mushroom.Ninja));
+                        break;
+                    case 2: 
+                        this.AddSprite(new Mario.Mushroom(this, x * 16 + 8, y * 16 + 8, Mario.Mushroom.Ghost));
+                        break;
+                    case 3: 
+                        this.AddSprite(new Mario.Mushroom(this, x * 16 + 8, y * 16 + 8, Mario.Mushroom.Princess));
+                        break;
+                    case 4: 
+                        this.AddSprite(new Mario.Mushroom(this, x * 16 + 8, y * 16 + 8, Mario.Mushroom.Toad));
+                        break;
+                    case 5: 
+                        this.AddSprite(new Mario.Mushroom(this, x * 16 + 8, y * 16 + 8, Mario.Mushroom.Mustashe));
+                        break;                }
             }
         } else {
             Mario.MarioCharacter.GetCoin();
